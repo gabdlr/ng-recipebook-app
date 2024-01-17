@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit, OnDestroy{
     }
 
     onSaveData():void {
-        console.log('holaa')
         this.store.dispatch(new RecipeActions.StoreRecipes());
     }
 
