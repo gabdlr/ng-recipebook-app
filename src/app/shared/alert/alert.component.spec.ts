@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
+import { By } from '@angular/platform-browser';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -19,5 +20,12 @@ describe('AlertComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call onClose method when the close button is clicked', () => {
+    const spy = spyOn(component.close, "emit");
+    const closeButton = fixture.debugElement.query(By.css('button'));
+    closeButton.triggerEventHandler('click', null);
+    expect(spy).toHaveBeenCalled();
   });
 });
