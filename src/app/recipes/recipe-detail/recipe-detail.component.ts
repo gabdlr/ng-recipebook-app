@@ -13,7 +13,7 @@ import * as ShoppingListActions from './../../shopping-list/store/shopping-list.
   styleUrls: ['./recipe-detail.component.scss']
 })
 export class RecipeDetailComponent implements OnInit {
-  recipe: Recipe;
+  recipe: Recipe = new Recipe('','','',[]);
   id: number;
   
   constructor(private route: ActivatedRoute,
