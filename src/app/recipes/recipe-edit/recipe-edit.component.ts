@@ -14,7 +14,13 @@ import * as RecipesActions from './../store/recipe.actions';
 export class RecipeEditComponent implements OnInit, OnDestroy {
   id: number;
   editMode: boolean = false;
-  recipeForm: FormGroup;
+  recipeForm: FormGroup = new FormGroup({
+    name: new FormControl(''),
+    imagePath: new FormControl(''),
+    description: new FormControl(''),
+    ingredients: new FormArray([])
+  });
+
   private storeSub: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -62,11 +68,11 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     }
 
     this.recipeForm = new FormGroup({
-      'name': new FormControl(recipeName, Validators.required),
-      'imagePath': new FormControl(recipeImagePath, Validators.required),
-      'description': new FormControl(recipeDescription, Validators.required),
-      'ingredients': recipeIngredients
-    })
+      name: new FormControl(recipeName, Validators.required),
+      imagePath: new FormControl(recipeImagePath, Validators.required),
+      description: new FormControl(recipeDescription, Validators.required),
+      ingredients: recipeIngredients
+    });
   }
 
   get controls() {
