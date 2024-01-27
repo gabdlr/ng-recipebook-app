@@ -6,6 +6,7 @@ import { Store } from "@ngrx/store";
 import * as fromApp from "./../../store/app.reducer";
 import { Recipe } from "../recipe.model";
 import { By } from "@angular/platform-browser";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe("recipe-detail component", () => {
   let fixture: ComponentFixture<RecipeDetailComponent>;
@@ -38,6 +39,7 @@ describe("recipe-detail component", () => {
         { provide: Router, useValue: routerSpy },
         { provide: Store, useValue: storeSpy },
       ],
+      schemas: [NO_ERRORS_SCHEMA]
     });
 
     fixture = TestBed.createComponent(RecipeDetailComponent);
