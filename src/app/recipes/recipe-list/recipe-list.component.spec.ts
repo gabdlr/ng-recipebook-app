@@ -4,6 +4,7 @@ import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { Recipe } from "../recipe.model";
 import { Ingredient } from "../../shared/ingredient.model";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe("recipe list component", () => {
   let fixture: ComponentFixture<RecipeListComponent>;
@@ -15,6 +16,7 @@ describe("recipe list component", () => {
     TestBed.configureTestingModule({
       declarations: [RecipeListComponent],
       providers: [{ provide: Store, useValue: storeSpy }],
+      schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(RecipeListComponent);
     component = fixture.componentInstance;
