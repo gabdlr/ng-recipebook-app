@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -16,10 +16,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   error: string = null;
   private storeSub: Subscription;
-  constructor(private store: Store<fromApp.AppState>,
-              //private componentFactoryResolver: ComponentFactoryResolver
-              ) { }
-  @ViewChild(PlaceholderDirective, {static:false}) alertHost: PlaceholderDirective;
+  constructor(private store: Store<fromApp.AppState>) { }
+  @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
 
   ngOnInit(): void {
     this.storeSub = this.store.select('auth').subscribe(authState => {
@@ -48,17 +46,9 @@ export class AuthComponent implements OnInit, OnDestroy {
     form.reset();
   }
 
-  onHandleError():void{
-    this.store.dispatch(new AuthActions.ClearError());
-  }
-
   private showErrorAlert(messagge: string){
-    //This was necessary in previous angular versions but it is now deprecated
-    //const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
     const hostViewContainerRef = this.alertHost.viewContainerRef;
     hostViewContainerRef.clear();
-    //This was necessary in previous angular versions but it is now deprecated
-    //const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
     const componentRef = hostViewContainerRef.createComponent(AlertComponent)
     componentRef.instance.messagge = messagge;
     const subscription: Subscription = componentRef.instance.close.subscribe(()=> {
@@ -68,6 +58,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.storeSub.unsubscribe();
+    if(this.storeSub){
+      this.storeSub.unsubscribe();
+    }
   }
 }
