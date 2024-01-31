@@ -13,7 +13,6 @@ export class AuthInterceptorService implements HttpInterceptor {
           map( authState => {
             return authState.user
           }),
-          //ExhaustMap concatena los dos observables
           exhaustMap(user => {
             if(user){
                 const modifiedRequest = req.clone({params: new HttpParams().set('auth',user.token)});
