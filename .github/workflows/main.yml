@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: $GITHUB_WORKSPACE/coverage/app/index.html
+          path: ${{ github.workspace }}/coverage/app/index.html
