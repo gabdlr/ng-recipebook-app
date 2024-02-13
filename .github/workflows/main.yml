@@ -1,0 +1,40 @@
+name: Angular Unit Tests - Push
+
+on:
+  push:
+    branches: [ master ]
+  pull_request: 
+    branches: [ master ]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli@14
+
+      - name: Change directory to project
+        working-directory: ./
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build:ci
+
+      - name: Run unit tests
+        run: npm run test:ci
+        env:
+          CI: true
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: ./karma-results/html_report/index.html
