@@ -19,9 +19,6 @@ jobs:
       - name: Install Angular CLI
         run: npm install -g @angular/cli@14
 
-      - name: Change directory to project
-        working-directory: ./
-
       - name: Install project dependencies
         run: npm ci
 
