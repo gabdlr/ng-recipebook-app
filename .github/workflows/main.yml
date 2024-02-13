@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: ./karma-results/html_report/index.html
+          path: ./coverage/app/index.html
